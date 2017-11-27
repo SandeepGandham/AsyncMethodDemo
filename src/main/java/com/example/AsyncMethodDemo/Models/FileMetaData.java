@@ -1,17 +1,20 @@
 package com.example.AsyncMethodDemo.Models;
 
 import java.nio.file.attribute.FileTime;
+import java.util.Date;
 
 
 public class FileMetaData {
 
     String fileName;
     String contentType;
-    FileTime createdTime;
-    FileTime lastAccessTime;
-    FileTime lastModifiedTime;
+    String createdTime;
+    String lastAccessTime;
+    String lastModifiedTime;
     long size;
     String path;
+    String parent;
+
 
 
     public String getFileName(){
@@ -22,15 +25,15 @@ public class FileMetaData {
         return contentType;
     }
 
-    public FileTime getCreatedTime() {
+    public String getCreatedTime() {
         return createdTime;
     }
 
-    public FileTime getLastAccessTime() {
+    public String getLastAccessTime() {
         return lastAccessTime;
     }
 
-    public FileTime getLastModifiedTime() {
+    public String getLastModifiedTime() {
         return lastModifiedTime;
     }
 
@@ -50,15 +53,15 @@ public class FileMetaData {
         this.contentType = contentType;
     }
 
-    public void setCreatedTime(FileTime createdTime) {
+    public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
     }
 
-    public void setLastAccessTime(FileTime lastAccessTime) {
+    public void setLastAccessTime(String lastAccessTime) {
         this.lastAccessTime = lastAccessTime;
     }
 
-    public void setLastModifiedTime(FileTime lastModifiedTime) {
+    public void setLastModifiedTime(String lastModifiedTime) {
         this.lastModifiedTime = lastModifiedTime;
     }
 
@@ -69,4 +72,8 @@ public class FileMetaData {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public String getParent() {return parent;    }
+
+    public void setParent(String parent) {this.parent = parent;}
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,25 +21,28 @@ public class FileWalkerService {
 
 
     @Async
-    public CompletableFuture<String> callFileWalker(String drivePath) throws InterruptedException {
+    public CompletableFuture<HashMap<String,String>> callFileWalker(String drivePath) throws InterruptedException {
 
         Path path = Paths.get(drivePath);
         FileWalkerUtil fileWalkerUtil = new FileWalkerUtil();
-        String result = null;
+        HashMap<String,String> createdJsonFileDetails = new HashMap<>();
+
         try {
             Files.walkFileTree(path, fileWalkerUtil);
+            createdJsonFileDetails.put(drivePath,fileWalkerUtil.getJsonFileName());
+            System.out.println(createdJsonFileDetails);
             Thread.sleep(5000L);
             //Read Data from Json file
 //            logger.info("********************************************************************************");
 //            final List<String> lines = Files.readAllLines(new File("FilesMetadata.json").toPath());
 //            logger.info(lines.toString());
-            result = "Successful";
+
 
         } catch (IOException ex) {
             Logger.getLogger(FileWalkerUtil.class.getName()).log(Level.SEVERE, null, ex);
-            result = "Failed";
+
         }
-        return CompletableFuture.completedFuture(result);
+        return CompletableFuture.completedFuture(createdJsonFileDetails);
     }
 
 }
